@@ -1,21 +1,9 @@
 package com.example.maikals.sunshine.app;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -26,7 +14,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new ForecastFragment())
                     .commit();
         }
     }
@@ -47,6 +35,7 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+
         if (id == R.id.action_settings) {
             return true;
         }
@@ -54,37 +43,5 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        private ArrayAdapter<String> mForecastAdapter;
-        public PlaceholderFragment() {
-        }
 
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            String[] forecastArray = {
-                    "Avui - assolellat - 21/23",
-                    "Demà - nuvol - 19/20",
-                    "Diumenge - meteorits - 50/60",
-                    "Dilluns - pluja intensa - 10/15",
-                    "Dimarts - AJUDA ATRAPAT A ESTACIÓ METEOROLÓGICA - 40/41",
-                    "Dimecres - Sale el sooool - 25/30",
-                    "Dijous - Calamarsa a la romana - 10/11"
-            };
-            List<String> weekForecast = new ArrayList<String>(Arrays.asList(forecastArray));
-            mForecastAdapter = new ArrayAdapter<String>(
-                    getActivity(),
-                    R.layout.list_item_forecast,
-                    R.id.list_item_forecast_textview,
-                    weekForecast);
-            ListView listview = (ListView) rootView.findViewById(R.id.listview_forecast);
-            listview.setAdapter(mForecastAdapter);
-
-            return rootView;
-        }
-    }
 }
